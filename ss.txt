@@ -1,0 +1,29 @@
+	/**
+	 * 新增角色记录
+	 * @param role 角色对象
+	 * @return 操作结果
+	 */
+	public Integer insertRole(JSONObject role){
+		
+		Integer result = 0;
+		//定义插入数据的SQL语句
+		String insertSQL = "insert into rbac_role (role_name,role_desc) values(?,?)";
+		
+		//打开数据库连接
+		Connection conn = DB.getConn();
+		PreparedStatement stmt = DB.getStatement(conn,insertSQL);
+
+		try{
+			//给stmt对象设置参数
+			stmt.setString(1, role.get("roleName").toString());
+			stmt.setString(2, role.get("roleDesc").toString());
+			
+			//执行插入更新操作
+			result = stmt.executeUpdate();
+			
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		
+		return result;
+	}
