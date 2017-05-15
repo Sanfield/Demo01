@@ -1,0 +1,7 @@
+﻿java.util.Date ud= new java.util.Date();
+Timestamp datetime = new Timestamp(ud.getTime());//java.util.sqlתjava.sql.datetime
+stmt.setTimestamp(11,datetime);
+
+
+json.put("klfile_uploadingTime", rs.getTimestamp("klfile_uploadingTime").toString().substring(0,19));
+rs.getTimestamp取到的值精确到毫秒，可以通过String截取
